@@ -6,6 +6,7 @@ use App\Facades\Contracts\AuthContract;
 use App\Adapters\Auth\BarAuthAdapter;
 use App\Adapters\Auth\BazAuthAdapter;
 use App\Adapters\Auth\FooAuthAdapter;
+use App\Dtos\AuthDto;
 use App\Enums\SystemsEnum;
 use Firebase\JWT\JWT;
 use Illuminate\Auth\AuthenticationException;
@@ -16,7 +17,7 @@ class AuthFacade implements AuthContract
     /**
      * @inheritDoc
      */
-    public function authenticate(string $login, string $password): string
+    public function authenticate(string $login, string $password): AuthDto
     {
         /** @var \App\Adapters\Auth\Contracts\AuthAdapter|null $authAdapter */
         $authAdapter = match (true) {
@@ -27,7 +28,7 @@ class AuthFacade implements AuthContract
         };
 
         return $authAdapter?->authenticate($login, $password)
-            ? $this->generateJwtToken($login, $authAdapter::getServiceName())
+            ? new AuthDto(token: $this->generateJwtToken($login, $authAdapter::getServiceName()))
             : throw new AuthenticationException();
     }
 

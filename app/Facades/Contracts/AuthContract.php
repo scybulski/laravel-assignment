@@ -2,6 +2,8 @@
 
 namespace App\Facades\Contracts;
 
+use App\Dtos\AuthDto;
+
 interface AuthContract
 {
     /**
@@ -9,5 +11,5 @@ interface AuthContract
      *
      * @throws \Illuminate\Auth\AuthenticationException
      */
-    public function authenticate(string $login, string $password): string;
+    public function authenticate(string $login, string $password): AuthDto;
 }
