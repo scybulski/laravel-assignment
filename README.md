@@ -51,7 +51,7 @@ There are classes in the External directory for communication with systems compa
 
 Request 1
 ```curl --location --request POST 'http://127.0.0.1:8000/api/login' \
---header 'Content-Type: text/plain' \
+--header 'Content-Type: application/json' \
 --data-raw '{
     "login": "test",
     "password": "foo-bar-baz"
@@ -65,7 +65,7 @@ Response 1
 Request 2
 ```
 curl --location --request POST 'http://127.0.0.1:8000/api/login' \
---header 'Content-Type: text/plain' \
+--header 'Content-Type: application/json' \
 --data-raw '{
     "login": "FOO_1",
     "password": "foo-bar-baz"
