@@ -41,7 +41,7 @@ There are classes in the External directory for communication with systems compa
 `External/Bar/Auth/LoginService.php` - class for authenticating BAR
 `External/Baz/Auth/Authenticator.php` - class for authenticating BAZ clients
 
---- 
+---
 
 #### Your task is to implement the method login. You can change the structure of files and directories freely, except for the External folder, which should be treated as an external library that cannot be modified.
 
@@ -117,3 +117,6 @@ This method is responsible for:
 resulting in a `ServiceUnavailableException` being thrown. Provide request repetition
 mechanism and result cache to relieve external systems and minimize the probability of failure.
 
+# Set-up
+
+Run `artisan generate:jwt-key` to generate the JWT key.
