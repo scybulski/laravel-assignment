@@ -3,6 +3,7 @@
 use App\Dtos\AuthDto;
 use App\Facades\Contracts\AuthContract;
 use Illuminate\Auth\AuthenticationException;
+use Mockery\MockInterface;
 
 it('should return a token when the user is authenticated', function (): void {
     $login = 'przemek';
@@ -11,7 +12,7 @@ it('should return a token when the user is authenticated', function (): void {
 
     $this->instance(
         AuthContract::class,
-        Mockery::mock(AuthContract::class, function ($mock) use ($login, $password, $jwtKey): void {
+        Mockery::mock(AuthContract::class, function (MockInterface $mock) use ($login, $password, $jwtKey): void {
             $mock->shouldReceive('authenticate')
                 ->once()
                 ->with($login, $password)
@@ -36,7 +37,7 @@ it('should return an error when the user is not authenticated', function (): voi
 
     $this->instance(
         AuthContract::class,
-        Mockery::mock(AuthContract::class, function ($mock) use ($login, $password): void {
+        Mockery::mock(AuthContract::class, function (MockInterface $mock) use ($login, $password): void {
             $mock->shouldReceive('authenticate')
                 ->once()
                 ->with($login, $password)

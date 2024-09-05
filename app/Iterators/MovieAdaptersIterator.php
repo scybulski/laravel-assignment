@@ -5,9 +5,10 @@ namespace App\Iterators;
 use App\Adapters\Movie\Contracts\MovieAdapterContract;
 use App\Enums\SystemsEnum;
 use App\Factories\Contracts\MovieAdapterFactoryContract;
+use App\Iterators\Contracts\MovieAdaptersIteratorContract;
 use Iterator;
 
-class MovieAdaptersIterator implements Iterator
+class MovieAdaptersIterator implements MovieAdaptersIteratorContract
 {
     protected ?int $position;
 

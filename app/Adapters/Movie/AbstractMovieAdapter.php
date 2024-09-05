@@ -7,8 +7,6 @@ use App\Dtos\MovieCollectionDto;
 use App\Enums\SystemsEnum;
 use Illuminate\Support\Facades\Cache;
 
-use function PHPUnit\Framework\callback;
-
 abstract class AbstractMovieAdapter implements MovieAdapterContract
 {
     public function getMovies(): MovieCollectionDto
@@ -18,6 +16,9 @@ abstract class AbstractMovieAdapter implements MovieAdapterContract
 
     protected function getCachedMovies(): MovieCollectionDto
     {
+        /**
+         * @todo use the Cache::flexible() method once shipped to the framework for deferred cache update
+         */
         return Cache::remember(
             key: $this->cacheKey(),
             ttl: now()->addMinutes(10),

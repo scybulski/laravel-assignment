@@ -5,7 +5,6 @@ namespace App\Facades;
 use App\Dtos\MovieCollectionDto;
 use App\Facades\Contracts\MovieContract;
 use App\Iterators\Contracts\MovieAdaptersIteratorContract;
-use Illuminate\Support\Arr;
 
 class MovieFacade implements MovieContract
 {
@@ -14,6 +13,9 @@ class MovieFacade implements MovieContract
     ) {
     }
 
+    /**
+     * @todo use the Concurrency facade when shipped to the framework
+     */
     public function getTitles(): MovieCollectionDto
     {
         $titles = new MovieCollectionDto([]);
