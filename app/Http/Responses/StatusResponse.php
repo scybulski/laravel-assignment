@@ -8,6 +8,7 @@ final class StatusResponse extends JsonResponse
 {
     public const STATUS_SUCCESS = 'success';
     public const STATUS_UNAUTHORIZED = 'unauthorized';
+    public const STATUS_FAILURE = 'failure';
 
     public static $wrap = null;
 
