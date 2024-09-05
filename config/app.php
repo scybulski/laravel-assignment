@@ -212,4 +212,9 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'jwt' => [
+        'secret' => env('APP_JWT_SECRET'),
+        'ttl' => (int) env('APP_JWT_TTL', 3600),
+    ],
+
 ];

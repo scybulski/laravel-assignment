@@ -2,17 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Facades\Contracts\AuthContract;
+use App\Http\Requests\LoginRequest;
+use App\Http\Responses\StatusResponse;
 
 class AuthController extends Controller
 {
-    public function login(Request $request): JsonResponse
+    public function __construct(protected AuthContract $authService)
     {
-        // TODO
+    }
 
-        return response()->json([
-            'status' => 'failure',
-        ]);
+    public function login(LoginRequest $request): StatusResponse
+    {
+        try {
+            $authDto = $this->authService->authenticate(
+                $request->validated('login'),
+                $request->validated('password'),
+            );
+
+            return StatusResponse::make(additionalPayload: [
+                'token' => $authDto->token,
+            ]);
+        } catch (\Illuminate\Auth\AuthenticationException) {
+            return StatusResponse::make(
+                httpStatus: StatusResponse::HTTP_UNAUTHORIZED,
+                status: StatusResponse::STATUS_UNAUTHORIZED,
+            );
+        }
     }
 }
